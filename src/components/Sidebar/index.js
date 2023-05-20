@@ -19,7 +19,17 @@ const Sidebar = () => {
 	const url = useRouter();
 
 	return (
-		<Box position="fixed" left={0} p={5} w="15vw" top={0} h="100%" bg="#f1f3f4">
+		<Box
+			position={"fixed"}
+			m={0}
+			left={0}
+			pl={5}
+			pr={5}
+			w="15vw"
+			top={0}
+			h="100vh"
+			bg="#f1f3f4"
+		>
 			<Box m="24px 0px">
 				<Logo />
 			</Box>
