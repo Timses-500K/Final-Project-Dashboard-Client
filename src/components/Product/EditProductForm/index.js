@@ -16,32 +16,22 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-const AddProductForm = ({ isOpen, onClose, onSubmit }) => {
-	const [item, setItem] = useState({
-		itemName: "",
-		description: "",
-		price: "",
-		imageUrl: "",
-		stock: "",
-		color: "",
-		visibility: "True",
-		size: "42",
-		categoryName: "Jordan",
-	});
+const EditProductForm = ({ data, isOpen, onClose, applyEdit }) => {
+	const [product, setProduct] = useState(JSON.parse(JSON.stringify(data)));
 
 	const onItemChange = (e, property) => {
 		e.preventDefault();
-		item[property] = e.target.value;
-		setItem({ ...item });
+		product[property] = e.target.value;
+		setProduct({ ...product });
 	};
 
 	const onNumberChange = (value, property) => {
-		item[property] = value;
-		setItem({ ...item });
+		product[property] = value;
+		setProduct({ ...product });
 	};
 
 	const testclick = () => {
-		console.log(item);
+		console.log(product);
 	};
 
 	return (
@@ -61,6 +51,7 @@ const AddProductForm = ({ isOpen, onClose, onSubmit }) => {
 						<HStack>
 							<Text w={350}>Product Name</Text>
 							<Input
+								value={product.itemName}
 								placeholder="Product Name"
 								size="md"
 								onChange={(e) => onItemChange(e, "itemName")}
@@ -71,6 +62,7 @@ const AddProductForm = ({ isOpen, onClose, onSubmit }) => {
 						<HStack>
 							<Text w={350}>Price</Text>
 							<NumberInput
+								value={product.price}
 								size="md"
 								width={"100%"}
 								onChange={(e) => onNumberChange(e, "price")}
@@ -83,6 +75,7 @@ const AddProductForm = ({ isOpen, onClose, onSubmit }) => {
 						<HStack>
 							<Text w={350}>Stock</Text>
 							<NumberInput
+								value={product.stock}
 								size="md"
 								width={"100%"}
 								onChange={(e) => onNumberChange(e, "stock")}
@@ -95,6 +88,7 @@ const AddProductForm = ({ isOpen, onClose, onSubmit }) => {
 						<HStack>
 							<Text w={350}>Color</Text>
 							<Input
+								value={product.color}
 								placeholder="Color"
 								size="md"
 								onChange={(e) => onItemChange(e, "color")}
@@ -105,6 +99,7 @@ const AddProductForm = ({ isOpen, onClose, onSubmit }) => {
 						<HStack>
 							<Text w={350}>Image</Text>
 							<Input
+								value={product.imageUrl}
 								placeholder="Image"
 								size="md"
 								onChange={(e) => onItemChange(e, "imageUrl")}
@@ -115,6 +110,7 @@ const AddProductForm = ({ isOpen, onClose, onSubmit }) => {
 						<HStack>
 							<Text w={350}>Description</Text>
 							<Textarea
+								value={product.description}
 								placeholder="Description"
 								size={"md"}
 								resize={"vertical"}
@@ -125,8 +121,8 @@ const AddProductForm = ({ isOpen, onClose, onSubmit }) => {
 				</ModalBody>
 
 				<ModalFooter>
-					<Button colorScheme="blue" mr={3} onClick={(e) => onSubmit(e, item)}>
-						Add Product
+					<Button colorScheme="blue" mr={3} onClick={() => applyEdit(product)}>
+						Apply Edit
 					</Button>
 					<Button variant="ghost" onClick={onClose}>
 						Cancel
@@ -137,4 +133,4 @@ const AddProductForm = ({ isOpen, onClose, onSubmit }) => {
 	);
 };
 
-export default AddProductForm;
+export default EditProductForm;
